@@ -1,0 +1,35 @@
+
+  
+MAILDIR="${HOME}/.mail"
+
+##### Vars for mailing.procmailrc ## test_list ##
+LIST="user1@domain.com,user2@other.com,user.three@otherdomain.net"
+LIST_NAME="test_list"
+LIST_LIB="Testing mailing list"
+LIST_REFUSED="This is an automatic answer.
+You are not authorized to post on ${LIST_NAME}@mydomain.com.
+Your email won't be read."
+
+#LOGFILE="${HOME}/${LIST_NAME}.procmail.log"
+
+INCLUDERC=${HOME}/mailing.procmailrc
+
+
+# You can manage as many as mailing lists you want by redefining vars
+# and include once again mailing.procmailrc
+
+##### Vars for mailing.procmailrc ## my_list ##
+LIST_NAME="my_list"
+# End users can manage by their own mailing list members, label, and 
+# refused message by defining corresponding vars in a remote file
+# at the time the file is readable.
+INCLUDERC=/home/john/.config/procmail/${LIST_NAME}rc
+
+LOGFILE="${HOME}/${LIST_NAME}.procmail.log"
+
+INCLUDERC=${HOME}/mailing.procmailrc
+
+### Send the email to root if not distributed at this point
+:0
+! root
+
