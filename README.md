@@ -11,12 +11,13 @@ mailing.procmail installation:
 root $> useradd mailing
 
 2/ Copy mailing.procmailrc and procmailrc.sample in ~mailing/<br>
-root $> cp procmailrc.sample mailing.procmailrc ~mailing/<br>
-root $> chown mailing:mailing ~mailing/procmailrc.sample ~mailing/mailing.procmailrc<br>
+root $> su - mailing/<br>
+mailing $> cp procmailrc.sample mailing.procmailrc ~mailing/<br>
+mailing $> chown mailing:mailing ~mailing/procmailrc.sample ~mailing/mailing.procmailrc<br>
 
 3/ Create .procmailrc and update vars accordingly to your mailing lists. Vars are documented in mailing.procmailrc<br>
-root $> cp procmailrc.sample .procmailrc<br>
-root $> vim .procmailrc
+mailing $> cp procmailrc.sample .procmailrc<br>
+mailing $> vim .procmailrc
 
 mailing lists members, label and refused message could be manage by end users at the time the corresponding vars are in files with read access.
 
