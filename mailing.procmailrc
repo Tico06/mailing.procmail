@@ -31,7 +31,7 @@ ECHO="/usr/bin/echo"
 # and FROM_AT, RECIPIENTS and FROM_TEST are computed
 
 #Only the @ part of the from email address is kept
-        FROM_AT=`echo "$MATCH"|sed -e 's/ ".*" *<//' -e 's/>//'`
+        FROM_AT=`echo "$MATCH"|sed -e 's/^.*<//' -e 's/>$//'`
 
 #FROM_AT is remove from list recipients to avoid the sender receives his 
 #own email.
