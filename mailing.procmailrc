@@ -24,7 +24,7 @@ ECHO="/usr/bin/echo"
 #LOGFILE="${HOME}/${LIST_NAME}.procmail.log"
 
 :0
-*$ ^(To|CC|BCC):.*${LIST_NAME}@grammatico\.me
+*$ ^(To|CC|BCC):.*${LIST_NAME}@mydomain\.com
 * ^FROM:()\/.*
 {
 # If the list is part of recipients, from email address is extracted 
@@ -52,15 +52,15 @@ LOG="FROM_TEST=${FROM_TEST}
 
 :0A
 *$ ^FROM:.*(${FROM_TEST})
-*$ !X-Loop: ${LIST_NAME}@grammatico\.me
+*$ !X-Loop: ${LIST_NAME}@mydomain\.com
 {
 # If the previous recipe tests succeeded
 # and the from address in included in our list
 # and X-Loop is not define
 # X-Loop and REPLY-TO are added to the email.
         :0Afhw
-        | $FORMAIL -a "X-Loop: ${LIST_NAME}@grammatico.me" \
-                -I "REPLY-TO: \"${LIST_LIB}\" <${LIST_NAME}@grammatico.me>"
+        | $FORMAIL -a "X-Loop: ${LIST_NAME}@mydomain.com" \
+                -I "REPLY-TO: \"${LIST_LIB}\" <${LIST_NAME}@mydomain.com>"
 
 # The email is distributed to the list members.
         :0
@@ -71,9 +71,9 @@ LOG="FROM_TEST=${FROM_TEST}
 # our list is part of recipients and X-Loop is not present
 # distribution is refused.
 :0E
-*$ ^(To|CC|BCC):.*${LIST_NAME}@grammatico\.me
-*$ !X-Loop: ${LIST_NAME}@grammatico\.me
-| ( $FORMAIL -r -a "X-Loop: ${LIST_NAME}@grammatico.me" \
-        -I "From: \"Ne pas repondre\" <noanswer@grammatico.me>"; \
+*$ ^(To|CC|BCC):.*${LIST_NAME}@mydomain\.com
+*$ !X-Loop: ${LIST_NAME}@mydomain\.com
+| ( $FORMAIL -r -a "X-Loop: ${LIST_NAME}@mydomain.com" \
+        -I "From: \"Ne pas repondre\" <noanswer@mydomain.com>"; \
         echo "${LIST_REFUSED}"; ) \
         | sendmail -t -oi
